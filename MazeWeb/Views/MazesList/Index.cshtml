@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Fr.Brocelia.MazeGen.DataLayer.Maze>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Maze List</h2>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css" />
+</head>
+
+<body>
+    <div class="Bouton">
+        <form>
+            <a href="/MazeWeb/Generate" class="btn btn-info">Generate New Maze</a>
+        </form>
+    </div>
+
+    <br />
+      <div>
+          <table class="table table-bordered text-center">
+              <tr>
+                  <th class="text-center">
+                      @Html.DisplayNameFor(model => model.Id)
+                  </th>
+                  <th class="text-center">
+                      @Html.DisplayNameFor(model => model.Width)
+                  </th>
+                  <th class="text-center">
+                      @Html.DisplayNameFor(model => model.Length)
+                  </th>
+                  <th class="text-center">
+                      @Html.DisplayNameFor(model => model.Entree)
+                  </th>
+                  <th class="text-center">
+                      @Html.DisplayNameFor(model => model.Sortie)
+                  </th>
+              </tr>
+
+              @foreach (var item in Model)
+              {
+                  <tr>
+                      <td>
+                          @Html.DisplayFor(model => item.Id)
+                      </td>
+                      <td>
+                          @Html.DisplayFor(modelItem => item.Width)
+                      </td>
+                      <td>
+                          @Html.DisplayFor(modelItem => item.Length)
+                      </td>
+                      <td>
+                          @Html.DisplayFor(modelItem => item.Entree)
+                      </td>
+                      <td>
+                          @Html.DisplayFor(modelItem => item.Sortie)
+                      </td>
+                      <td>
+                          <a href="/MazeWeb/Display/@item.Id" class="btn btn-info">Display</a>
+                      </td>
+                  </tr>
+              }
+
+          </table>
+      </div>
+</body>

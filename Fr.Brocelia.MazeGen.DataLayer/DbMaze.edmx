@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MazeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Maze">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
+          <Property Name="Entree" Type="int" Nullable="false" />
+          <Property Name="Sortie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MazeTile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MazeId" Type="int" Nullable="false" />
+          <Property Name="x" Type="int" Nullable="false" />
+          <Property Name="y" Type="int" Nullable="false" />
+          <Property Name="MapType" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MazeTile_Maze">
+          <End Role="Maze" Type="Self.Maze" Multiplicity="1" />
+          <End Role="MazeTile" Type="Self.MazeTile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maze">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MazeTile">
+              <PropertyRef Name="MazeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MazeModelStoreContainer">
+          <EntitySet Name="Maze" EntityType="Self.Maze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MazeTile" EntityType="Self.MazeTile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MazeTile_Maze" Association="Self.FK_MazeTile_Maze">
+            <End Role="Maze" EntitySet="Maze" />
+            <End Role="MazeTile" EntitySet="MazeTile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MazeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MazeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Maze" EntityType="MazeModel.Maze" />
+          <EntitySet Name="MazeTile" EntityType="MazeModel.MazeTile" />
+          <AssociationSet Name="FK_MazeTile_Maze" Association="MazeModel.FK_MazeTile_Maze">
+            <End Role="Maze" EntitySet="Maze" />
+            <End Role="MazeTile" EntitySet="MazeTile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Maze">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Entree" Type="Int32" Nullable="false" />
+          <Property Name="Sortie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MazeTile" Relationship="MazeModel.FK_MazeTile_Maze" FromRole="Maze" ToRole="MazeTile" />
+        </EntityType>
+        <EntityType Name="MazeTile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="MazeId" Type="Int32" Nullable="false" />
+          <Property Name="x" Type="Int32" Nullable="false" />
+          <Property Name="y" Type="Int32" Nullable="false" />
+          <Property Name="MapType" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Maze" Relationship="MazeModel.FK_MazeTile_Maze" FromRole="MazeTile" ToRole="Maze" />
+        </EntityType>
+        <Association Name="FK_MazeTile_Maze">
+          <End Type="MazeModel.Maze" Role="Maze" Multiplicity="1" />
+          <End Type="MazeModel.MazeTile" Role="MazeTile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maze">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MazeTile">
+              <PropertyRef Name="MazeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MazeModelStoreContainer" CdmEntityContainer="MazeEntities">
+          <EntitySetMapping Name="Maze">
+            <EntityTypeMapping TypeName="MazeModel.Maze">
+              <MappingFragment StoreEntitySet="Maze">
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="Entree" ColumnName="Entree" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MazeTile">
+            <EntityTypeMapping TypeName="MazeModel.MazeTile">
+              <MappingFragment StoreEntitySet="MazeTile">
+                <ScalarProperty Name="MapType" ColumnName="MapType" />
+                <ScalarProperty Name="y" ColumnName="y" />
+                <ScalarProperty Name="x" ColumnName="x" />
+                <ScalarProperty Name="MazeId" ColumnName="MazeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

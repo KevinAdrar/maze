@@ -1,0 +1,54 @@
+﻿@model MazeWeb.Models.MazeDisplay
+@using MazeWeb.Helpers;
+
+@{
+    ViewBag.Title = "Display";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css" />
+    <script src="~/Scripts/MazeScript.js"></script>
+</head>
+
+<h2>Maze</h2>
+
+<div class="MazeGen">
+    @Html.HiddenFor(x => x.Entree)
+    @Html.HiddenFor(y => y.Sortie)
+    <table id="maze">
+        <tbody>
+            @for (int i = 0; i < Model.Length; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < Model.Width; j++)
+                    {
+                    <td>
+                        @if (i == 0 && j == Model.Entree)
+                        {
+                            @TileHelpers.ConvertChar("CurrentPos")
+                        }
+                        else
+                        {
+                            @TileHelpers.ConvertChar(Model.MazeTile.Where(m => m.x == i && m.y == j).First().MapType)
+                        }
+                        @*@TileHelpers.ConvertChar(Model.MazeTile.Where(m => m.x == i && m.y == j).First().MapType)*@
+                    </td>
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="Bouton">
+    <form>
+        <a href="/MazeWeb/Generate" class="btn btn-info">Generate New Maze</a>
+    </form>
+</div>
+
+<div class="Bouton">
+    <form>
+        <a href="/MazesList/Index" class="btn btn-info">Back to list</a>
+    </form>
+</div>
+    

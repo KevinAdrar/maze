@@ -1,0 +1,26 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Concert+One&display=swap');
+* {
+
+}
+.MazeGen {
+    font-family: 'Concert One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    font-family: 'Concert One', cursive;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: center
+}
+
+.Bouton {
+    font-family: 'Concert One', cursive;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

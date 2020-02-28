@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bbd0a5c27fa3444f9e19dc7900eaee53" Name="Diagram1">
+        <EntityTypeShape EntityType="MazeModel.Maze" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MazeModel.MazeTile" Width="1.5" PointX="3.125" PointY="0.75" />
+        <AssociationConnector Association="MazeModel.FK_MazeTile_Maze" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
